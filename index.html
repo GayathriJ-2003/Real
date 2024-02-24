@@ -3,55 +3,83 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Real Estate House Comparison App</title>
+		<title>House Beta</title>
 		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
-	<body class="font-sans antialiased bg-gray-100">
+	<body class="font-sans antialiased">
 		<div class="flex">
 			<!-- Sidebar -->
-			<div class="bg-gray-200 w-60 min-h-screen transition-width ease-in-out overflow-y-auto relative" id="sidebar">
-				<div class="p-4">
-					<h2 class="text-lg font-semibold">Filters</h2>
-					<select id="filterSelect" onchange="filterHouses(this.value)" class="mt-2 p-2 rounded-md w-full">
-						<option value="all">All</option>
-						<option value="sale">Sale</option>
-						<option value="rent">Rent</option>
-					</select>
-				</div>
-				<div class="bg-gray-300 p-4 cursor-pointer absolute bottom-4 left-1/2 transform -translate-x-1/2" onclick="toggleSidebar()">☰</div>
-			</div>
+			<aside id="sidebar" class="bg-gray-200 w-64 min-h-screen flex-shrink-0 transition-all duration-300">
+            <button onclick="toggleSidebar()" class="bg-gray-300 p-2 w-full rounded-tl-md rounded-tr-md">               
+					<i class="fa fa-bars" aria-hidden="true"></i>              
+            </button>
+            <div class="p-4">
+                <h2 class="text-xl font-semibold mb-4">Filter by:</h2>
+                <div class="mb-4">
+                    <label class="block mb-2">For:</label>
+                    <select id="filterSelect" onchange="filterHouses(this.value)" class="px-4 py-2 w-full border rounded-md">
+                        <option value="all">All</option>
+                        <option value="sale">Sale</option>
+                        <option value="rent">Rent</option>
+                    </select>
+                </div>
+            </div>
+        </aside>
 
 			<!-- Main Content -->
 			<div class="flex-1 p-4 overflow-y-auto">
+				<div class=" items-center flex text-4xl bg-rose-200">					
+					<div>
+						<img class="h-12 w-12" src="house.jpg"></img>
+					</div>
+					<div class="pl-2 text-blue-900 font-semibold"> House Beta</div>
+				</div>
 				<div class="grid grid-cols-2 gap-4">
-					<div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between" data-category="sale" onclick="addToComparison('House 1', '$300,000', '2000 sqft', 'City A')">
-						<h2 class="text-lg font-semibold">House 1</h2>
-						<p><strong>Price:</strong> $300,000</p>
-						<p><strong>Size:</strong> 2000 sqft</p>
-						<p><strong>Location:</strong> City A</p>
-						<p><strong>For:</strong> Sale</p>
+					<div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between" data-category="sale">
+						<a href="houseDetails.html">
+							<h2 class="text-lg font-semibold">House 1</h2>
+							<p><strong>Price:</strong> $300,000</p>
+							<p><strong>Size:</strong> 2000 sqft</p>
+							<p><strong>Location:</strong> City A</p>
+							<p><strong>For:</strong> Sale</p>
+						</a>
+						<div><button class="bg-blue-500 font-medium p-2 rounded rounded-sm text-white" onclick="addToComparison('House 4', '$2500/month', '1800 sqft', 'City D')">Add to Comprision</button></div>
 					</div>
-					<div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between" data-category="rent" onclick="addToComparison('House 2', '$2000/month', '1500 sqft', 'City B')">
-						<h2 class="text-lg font-semibold">House 2</h2>
-						<p><strong>Price:</strong> $2000/month</p>
-						<p><strong>Size:</strong> 1500 sqft</p>
-						<p><strong>Location:</strong> City B</p>
-						<p><strong>For:</strong> Rent</p>
+
+					<div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between" data-category="rent">
+						<a href="houseDetails.html">
+							<h2 class="text-lg font-semibold">House 2</h2>
+							<p><strong>Price:</strong> $2000/month</p>
+							<p><strong>Size:</strong> 1500 sqft</p>
+							<p><strong>Location:</strong> City B</p>
+							<p><strong>For:</strong> Rent</p>
+						</a>
+						<div><button class="bg-blue-500 font-medium p-2 rounded rounded-sm text-white" onclick="addToComparison('House 4', '$2500/month', '1800 sqft', 'City D')">Add to Comprision</button></div>
 					</div>
-					<div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between" data-category="sale" onclick="addToComparison('House 3', '$400,000', '2500 sqft', 'City C')">
-						<h2 class="text-lg font-semibold">House 3</h2>
-						<p><strong>Price:</strong> $400,000</p>
-						<p><strong>Size:</strong> 2500 sqft</p>
-						<p><strong>Location:</strong> City C</p>
-						<p><strong>For:</strong> Sale</p>
+
+					<div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between" data-category="sale">
+						<a href="houseDetails.html">
+							<h2 class="text-lg font-semibold">House 3</h2>
+							<p><strong>Price:</strong> $400,000</p>
+							<p><strong>Size:</strong> 2500 sqft</p>
+							<p><strong>Location:</strong> City C</p>
+							<p><strong>For:</strong> Sale</p>
+						</a>
+						<div><button class="bg-blue-500 font-medium p-2 rounded rounded-sm text-white" onclick="addToComparison('House 4', '$2500/month', '1800 sqft', 'City D')">Add to Comprision</button></div>
 					</div>
-					<div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between" data-category="rent" onclick="addToComparison('House 4', '$2500/month', '1800 sqft', 'City D')">
-						<h2 class="text-lg font-semibold">House 4</h2>
-						<p><strong>Price:</strong> $2500/month</p>
-						<p><strong>Size:</strong> 1800 sqft</p>
-						<p><strong>Location:</strong> City D</p>
-						<p><strong>For:</strong> Rent</p>
+
+					<div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between" data-category="rent">
+						<a href="houseDetails.html">
+							<h2 class="text-lg font-semibold">House 4</h2>
+							<p><strong>Price:</strong> $2500/month</p>
+							<p><strong>Size:</strong> 1800 sqft</p>
+							<p><strong>Location:</strong> City D</p>
+							<p><strong>For:</strong> Rent</p>
+						</a>
+						<div><button class="bg-blue-500 font-medium p-2 rounded rounded-sm text-white" onclick="addToComparison('House 4', '$2500/month', '1800 sqft', 'City D')">Add to Comprision</button></div>
 					</div>
+
 					<!-- Add more house cards here -->
 				</div>
 
@@ -101,9 +129,19 @@
 			}
 
 			function toggleSidebar() {
-				const sidebar = document.getElementById("sidebar")
-				sidebar.classList.toggle("collapse")
-			}
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("w-64");
+            sidebar.classList.toggle("w-12");
+            const button = document.querySelector("#sidebar button");
+            button.classList.toggle("left-4");
+            button.classList.toggle("left-0");
+            const filterSection = document.querySelector("#sidebar > div");
+            if (sidebar.classList.contains("w-12")) {
+                filterSection.style.display = "none";
+            } else {
+                filterSection.style.display = "block";
+            }
+        }
 		</script>
 	</body>
 </html>
