@@ -1,3 +1,94 @@
-<html>
-  <title>This is my test page</title>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Real Estate House Comparison App</title>
+		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+		<style>
+			/* Custom styles can be added here */
+		</style>
+	</head>
+	<body class="bg-gray-100">
+		<div class="container mx-auto py-8">
+			<h1 class="text-2xl font-bold mb-4">House Comparison App</h1>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+				<div class="bg-white p-6 rounded-lg shadow-md">
+					<img src="house1.jpg" alt="House 1" class="mb-4 rounded-md" />
+					<h2 class="text-xl font-bold mb-2">House 1</h2>
+					<p><strong>Price:</strong> $300,000</p>
+					<p><strong>Size:</strong> 2000 sqft</p>
+					<p><strong>Location:</strong> City A</p>
+					<p><strong>For:</strong> Sale</p>
+					<button onclick="addToComparison('House 1', '$300,000', '2000 sqft', 'City A')" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Add to Compare</button>
+				</div>
+				<div class="bg-white p-6 rounded-lg shadow-md">
+					<img src="house2.jpg" alt="House 2" class="mb-4 rounded-md" />
+					<h2 class="text-xl font-bold mb-2">House 2</h2>
+					<p><strong>Price:</strong> $350,000</p>
+					<p><strong>Size:</strong> 2200 sqft</p>
+					<p><strong>Location:</strong> City B</p>
+					<p><strong>For:</strong> Rent</p>
+					<button onclick="addToComparison('House 2', '$350,000', '2200 sqft', 'City B')" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Add to Compare</button>
+				</div>
+				<div class="bg-white p-6 rounded-lg shadow-md">
+					<img src="house3.jpg" alt="House 3" class="mb-4 rounded-md" />
+					<h2 class="text-xl font-bold mb-2">House 3</h2>
+					<p><strong>Price:</strong> $280,000</p>
+					<p><strong>Size:</strong> 1800 sqft</p>
+					<p><strong>Location:</strong> City C</p>
+					<p><strong>For:</strong> Sale</p>
+					<button onclick="addToComparison('House 3', '$280,000', '1800 sqft', 'City C')" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Add to Compare</button>
+				</div>
+			</div>
+			<div class="mt-8">
+				<h2 class="text-xl font-bold mb-4">Comparison Table</h2>
+				<table id="comparisonTable" class="w-full border-collapse border border-gray-300">
+					<thead>
+						<tr>
+							<th class="border border-gray-300 px-4 py-2">Feature</th>
+							<th class="border border-gray-300 px-4 py-2">House 1</th>
+							<th class="border border-gray-300 px-4 py-2">House 2</th>
+							<th class="border border-gray-300 px-4 py-2">House 3</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="border border-gray-300 px-4 py-2">Price</td>
+							<td id="priceHouse1" class="border border-gray-300 px-4 py-2"></td>
+							<td id="priceHouse2" class="border border-gray-300 px-4 py-2"></td>
+							<td id="priceHouse3" class="border border-gray-300 px-4 py-2"></td>
+						</tr>
+						<tr>
+							<td class="border border-gray-300 px-4 py-2">Size</td>
+							<td id="sizeHouse1" class="border border-gray-300 px-4 py-2"></td>
+							<td id="sizeHouse2" class="border border-gray-300 px-4 py-2"></td>
+							<td id="sizeHouse3" class="border border-gray-300 px-4 py-2"></td>
+						</tr>
+						<tr>
+							<td class="border border-gray-300 px-4 py-2">Location</td>
+							<td id="locationHouse1" class="border border-gray-300 px-4 py-2"></td>
+							<td id="locationHouse2" class="border border-gray-300 px-4 py-2"></td>
+							<td id="locationHouse3" class="border border-gray-300 px-4 py-2"></td>
+						</tr>
+						<tr>
+							<td class="border border-gray-300 px-4 py-2">For</td>
+							<td id="forHouse1" class="border border-gray-300 px-4 py-2"></td>
+							<td id="forHouse2" class="border border-gray-300 px-4 py-2"></td>
+							<td id="forHouse3" class="border border-gray-300 px-4 py-2"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<script>
+			function addToComparison(name, price, size, location) {
+				document.getElementById("price" + name.replace(" ", "")).textContent = price
+				document.getElementById("size" + name.replace(" ", "")).textContent = size
+				document.getElementById("location" + name.replace(" ", "")).textContent = location
+				document.getElementById("for" + name.replace(" ", "")).textContent = name.includes("Rent") ? "Rent" : "Sale"
+			}
+		</script>
+	</body>
 </html>
