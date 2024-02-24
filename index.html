@@ -5,89 +5,104 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Real Estate House Comparison App</title>
 		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-		<style>
-			/* Custom styles can be added here */
-		</style>
 	</head>
-	<body class="bg-gray-100">
-		<div class="container mx-auto py-8">
-			<h1 class="text-2xl font-bold mb-4">House Comparison App</h1>
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-				<div class="bg-white p-6 rounded-lg shadow-md">
-					<img src="house1.jpg" alt="House 1" class="mb-4 rounded-md" />
-					<h2 class="text-xl font-bold mb-2">House 1</h2>
-					<p><strong>Price:</strong> $300,000</p>
-					<p><strong>Size:</strong> 2000 sqft</p>
-					<p><strong>Location:</strong> City A</p>
-					<p><strong>For:</strong> Sale</p>
-					<button onclick="addToComparison('House 1', '$300,000', '2000 sqft', 'City A')" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Add to Compare</button>
+	<body class="font-sans antialiased bg-gray-100">
+		<div class="flex">
+			<!-- Sidebar -->
+			<div class="bg-gray-200 w-60 min-h-screen transition-width ease-in-out overflow-y-auto relative" id="sidebar">
+				<div class="p-4">
+					<h2 class="text-lg font-semibold">Filters</h2>
+					<select id="filterSelect" onchange="filterHouses(this.value)" class="mt-2 p-2 rounded-md w-full">
+						<option value="all">All</option>
+						<option value="sale">Sale</option>
+						<option value="rent">Rent</option>
+					</select>
 				</div>
-				<div class="bg-white p-6 rounded-lg shadow-md">
-					<img src="house2.jpg" alt="House 2" class="mb-4 rounded-md" />
-					<h2 class="text-xl font-bold mb-2">House 2</h2>
-					<p><strong>Price:</strong> $350,000</p>
-					<p><strong>Size:</strong> 2200 sqft</p>
-					<p><strong>Location:</strong> City B</p>
-					<p><strong>For:</strong> Rent</p>
-					<button onclick="addToComparison('House 2', '$350,000', '2200 sqft', 'City B')" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Add to Compare</button>
-				</div>
-				<div class="bg-white p-6 rounded-lg shadow-md">
-					<img src="house3.jpg" alt="House 3" class="mb-4 rounded-md" />
-					<h2 class="text-xl font-bold mb-2">House 3</h2>
-					<p><strong>Price:</strong> $280,000</p>
-					<p><strong>Size:</strong> 1800 sqft</p>
-					<p><strong>Location:</strong> City C</p>
-					<p><strong>For:</strong> Sale</p>
-					<button onclick="addToComparison('House 3', '$280,000', '1800 sqft', 'City C')" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Add to Compare</button>
-				</div>
+				<div class="bg-gray-300 p-4 cursor-pointer absolute bottom-4 left-1/2 transform -translate-x-1/2" onclick="toggleSidebar()">☰</div>
 			</div>
-			<div class="mt-8">
-				<h2 class="text-xl font-bold mb-4">Comparison Table</h2>
-				<table id="comparisonTable" class="w-full border-collapse border border-gray-300">
-					<thead>
-						<tr>
-							<th class="border border-gray-300 px-4 py-2">Feature</th>
-							<th class="border border-gray-300 px-4 py-2">House 1</th>
-							<th class="border border-gray-300 px-4 py-2">House 2</th>
-							<th class="border border-gray-300 px-4 py-2">House 3</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="border border-gray-300 px-4 py-2">Price</td>
-							<td id="priceHouse1" class="border border-gray-300 px-4 py-2"></td>
-							<td id="priceHouse2" class="border border-gray-300 px-4 py-2"></td>
-							<td id="priceHouse3" class="border border-gray-300 px-4 py-2"></td>
-						</tr>
-						<tr>
-							<td class="border border-gray-300 px-4 py-2">Size</td>
-							<td id="sizeHouse1" class="border border-gray-300 px-4 py-2"></td>
-							<td id="sizeHouse2" class="border border-gray-300 px-4 py-2"></td>
-							<td id="sizeHouse3" class="border border-gray-300 px-4 py-2"></td>
-						</tr>
-						<tr>
-							<td class="border border-gray-300 px-4 py-2">Location</td>
-							<td id="locationHouse1" class="border border-gray-300 px-4 py-2"></td>
-							<td id="locationHouse2" class="border border-gray-300 px-4 py-2"></td>
-							<td id="locationHouse3" class="border border-gray-300 px-4 py-2"></td>
-						</tr>
-						<tr>
-							<td class="border border-gray-300 px-4 py-2">For</td>
-							<td id="forHouse1" class="border border-gray-300 px-4 py-2"></td>
-							<td id="forHouse2" class="border border-gray-300 px-4 py-2"></td>
-							<td id="forHouse3" class="border border-gray-300 px-4 py-2"></td>
-						</tr>
-					</tbody>
-				</table>
+
+			<!-- Main Content -->
+			<div class="flex-1 p-4 overflow-y-auto">
+				<div class="grid grid-cols-2 gap-4">
+					<div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between" data-category="sale" onclick="addToComparison('House 1', '$300,000', '2000 sqft', 'City A')">
+						<h2 class="text-lg font-semibold">House 1</h2>
+						<p><strong>Price:</strong> $300,000</p>
+						<p><strong>Size:</strong> 2000 sqft</p>
+						<p><strong>Location:</strong> City A</p>
+						<p><strong>For:</strong> Sale</p>
+					</div>
+					<div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between" data-category="rent" onclick="addToComparison('House 2', '$2000/month', '1500 sqft', 'City B')">
+						<h2 class="text-lg font-semibold">House 2</h2>
+						<p><strong>Price:</strong> $2000/month</p>
+						<p><strong>Size:</strong> 1500 sqft</p>
+						<p><strong>Location:</strong> City B</p>
+						<p><strong>For:</strong> Rent</p>
+					</div>
+					<div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between" data-category="sale" onclick="addToComparison('House 3', '$400,000', '2500 sqft', 'City C')">
+						<h2 class="text-lg font-semibold">House 3</h2>
+						<p><strong>Price:</strong> $400,000</p>
+						<p><strong>Size:</strong> 2500 sqft</p>
+						<p><strong>Location:</strong> City C</p>
+						<p><strong>For:</strong> Sale</p>
+					</div>
+					<div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between" data-category="rent" onclick="addToComparison('House 4', '$2500/month', '1800 sqft', 'City D')">
+						<h2 class="text-lg font-semibold">House 4</h2>
+						<p><strong>Price:</strong> $2500/month</p>
+						<p><strong>Size:</strong> 1800 sqft</p>
+						<p><strong>Location:</strong> City D</p>
+						<p><strong>For:</strong> Rent</p>
+					</div>
+					<!-- Add more house cards here -->
+				</div>
+
+				<!-- Comparison Table -->
+				<div class="mt-8">
+					<h2 class="text-lg font-semibold">Comparison Table</h2>
+					<table id="comparisonTable" class="w-full mt-4">
+						<thead>
+							<tr>
+								<th class="border border-gray-400 px-4 py-2">Name</th>
+								<th class="border border-gray-400 px-4 py-2">Price</th>
+								<th class="border border-gray-400 px-4 py-2">Size</th>
+								<th class="border border-gray-400 px-4 py-2">Location</th>
+								<th class="border border-gray-400 px-4 py-2">For</th>
+							</tr>
+						</thead>
+						<tbody id="comparisonBody"></tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 
+		<!-- JavaScript -->
 		<script>
 			function addToComparison(name, price, size, location) {
-				document.getElementById("price" + name.replace(" ", "")).textContent = price
-				document.getElementById("size" + name.replace(" ", "")).textContent = size
-				document.getElementById("location" + name.replace(" ", "")).textContent = location
-				document.getElementById("for" + name.replace(" ", "")).textContent = name.includes("Rent") ? "Rent" : "Sale"
+				const tableBody = document.getElementById("comparisonBody")
+				const newRow = document.createElement("tr")
+				newRow.innerHTML = `
+                <td class="border border-gray-400 px-4 py-2">${name}</td>
+                <td class="border border-gray-400 px-4 py-2">${price}</td>
+                <td class="border border-gray-400 px-4 py-2">${size}</td>
+                <td class="border border-gray-400 px-4 py-2">${location}</td>
+                <td class="border border-gray-400 px-4 py-2">${name.includes("Rent") ? "Rent" : "Sale"}</td>
+            `
+				tableBody.appendChild(newRow)
+			}
+
+			function filterHouses(category) {
+				const houses = document.querySelectorAll("[data-category]")
+				houses.forEach((house) => {
+					if (category === "all" || house.dataset.category === category) {
+						house.style.display = "block"
+					} else {
+						house.style.display = "none"
+					}
+				})
+			}
+
+			function toggleSidebar() {
+				const sidebar = document.getElementById("sidebar")
+				sidebar.classList.toggle("collapse")
 			}
 		</script>
 	</body>
