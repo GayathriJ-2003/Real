@@ -1,3 +1,1 @@
-This is a Real Estate house coparision app.
-[Click Here to view the app] (https://vscode.dev/github/GayathriJ-2003/Real/blob/main/index.html)
-
+This real estate comparison website offers a user-friendly platform for users to filter and compare houses based on city, BHK (number of bedrooms), and buying or renting criteria. The website presents detailed information about each property, including name, price, size, location, and transaction type. A dynamic comparison table allows users to add houses for side-by-side evaluation and easily remove them when not needed. This streamlined interface ensures users can efficiently explore and analyze real estate options to make well-informed decisions.
